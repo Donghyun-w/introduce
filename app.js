@@ -6,7 +6,7 @@ const DEFAULT_DATA = {
   name: '장동현',
   role: '학생',
   intro: '',
-  portrait: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+  portrait: '',
   portraitCaption: '홍길동 / 개발자',
   aboutText: ``,
   tags: ['미식축구', '농구', '게임'],
