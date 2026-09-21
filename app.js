@@ -3,47 +3,23 @@
  */
 
 const DEFAULT_DATA = {
-  name: '홍길동',
-  role: 'Frontend Developer',
-  intro: '새로운 기술을 배우고 사람들에게 가치를 주는 웹 서비스를 만듭니다.',
+  name: '장동현',
+  role: '학생',
+  intro: '',
   portrait: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
   portraitCaption: '홍길동 / 개발자',
-  aboutText: `안녕하세요! 문제를 해결하는 것을 즐기며 사용자에게 직관적이고 아름다운 UI/UX를 제공하는 웹 프론트엔드 개발자입니다.\n팀원들과 원활하게 소통하고 협업하는 것을 중요하게 생각합니다.`,
-  tags: ['JavaScript', 'React', 'HTML/CSS', 'Figma', '웹개발'],
+  aboutText: ``,
+  tags: ['미식축구', '농구', '게임'],
   aboutPhotos: [
     {
       id: 'about-1',
       title: '일상 사진',
-      image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80'
+      image: ' '
     },
     {
       id: 'about-2',
       title: '여행 스냅',
-      image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80'
-    }
-  ],
-  timeline: [
-    {
-      period: '2023.03 - 2023.09',
-      title: '프론트엔드 부트캠프 수료',
-      desc: '모던 자바스크립트 및 컴포넌트 아키텍처 학습'
-    },
-    {
-      period: '2023.10 - 2024.02',
-      title: '웹 개발 프로젝트 진행',
-      desc: '반응형 포트폴리오 및 대시보드 UI 제작'
-    }
-  ],
-  gallery: [
-    {
-      id: 'g-1',
-      title: '작업 프로젝트',
-      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80'
-    },
-    {
-      id: 'g-2',
-      title: '데스크 환경',
-      image: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80'
+      image: ' '
     }
   ],
   contact: {
