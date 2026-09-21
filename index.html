@@ -1,153 +1,346 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>자기소개</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="topbar">
-      <a class="logo" href="#top" data-field="shortName">닝</a>
-      <nav>
-        <a href="#about">소개</a>
-        <a href="#work">학력</a>
-        <a href="#projects">프로젝트</a>
-        <a href="#photos">사진</a>
-      </nav>
-      <button class="edit-btn" type="button" id="open-editor">내용 편집</button>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>나만의 자기소개 웹사이트</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Additional refined styles for enhanced photo upload & interactive editing */
+    .portrait-frame {
+      cursor: pointer;
+      position: relative;
+    }
+    .portrait-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .portrait-frame:hover .portrait-overlay {
+      opacity: 1;
+    }
+    .upload-box {
+      border: 2px dashed var(--line);
+      padding: 24px;
+      text-align: center;
+      background: #fafafa;
+      cursor: pointer;
+      margin-bottom: 12px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    .upload-box:hover, .upload-box.dragover {
+      border-color: var(--ink);
+      background: #f0f0f0;
+    }
+    .upload-box i {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #111;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: opacity 0.3s;
+    }
+    .toast.hidden {
+      display: none;
+    }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lightbox.hidden {
+      display: none;
+    }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+    }
+    .about-photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .about-photo-item {
+      position: relative;
+      aspect-ratio: 1;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      cursor: pointer;
+      background: #f5f5f5;
+    }
+    .about-photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .about-photo-item .btn-del-photo {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      border: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="logo" id="displayLogo">장동현</div>
+    <nav>
+      <a href="#about">소개</a>
+      <a href="#timeline">이력</a>
+      <a href="#gallery">갤러리</a>
+      <a href="#contact">연락처</a>
+    </nav>
+    <div style="display:flex; gap:8px;">
+      <button class="edit-btn" id="btnOpenEditor"><i class="fa-solid fa-pen"></i> 내용 및 사진 편집</button>
+    </div>
+  </header>
 
-    <main id="top">
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow" data-field="role">Software Engineer</p>
-          <h1 data-field="name">장동현</h1>
-          <p class="lede" data-field="tagline">
-            장동현입니다.
-          </p>
-          <div class="hero-actions">
-            <a class="btn primary" href="#contact">연락하기</a>
-            <a class="btn ghost" href="#photos">사진 보기</a>
-          </div>
-        </div>
-        <figure class="portrait">
-          <div class="portrait-frame">
-            <img id="profile-image" alt="프로필 사진" />
-            <div class="portrait-fallback" id="profile-fallback">NING</div>
-          </div>
-          <figcaption data-field="photoCaption">프로필 사진을 올려보세요</figcaption>
-        </figure>
-      </section>
-
-      <section id="about" class="section">
-        <div class="section-head">
-          <span>01</span>
-          <h2>소개</h2>
-        </div>
-        <p class="about-text" data-field="about"></p>
-        <ul class="tags" id="tags"></ul>
-      </section>
-
-      <section id="work" class="section">
-        <div class="section-head">
-          <span>02</span>
-          <h2>경험</h2>
-        </div>
-        <ol class="timeline" id="timeline"></ol>
-      </section>
-
-      <section id="projects" class="section">
-        <div class="section-head">
-          <span>03</span>
-          <h2>프로젝트</h2>
-        </div>
-        <div class="cards" id="projects-list"></div>
-      </section>
-
-      <section id="photos" class="section">
-        <div class="section-head">
-          <span>04</span>
-          <h2>사진</h2>
-        </div>
-        <div class="gallery" id="gallery"></div>
-        <p class="empty-note" id="gallery-empty">아직 올린 사진이 없습니다. 오른쪽 위 ‘내용 편집’에서 추가하세요.</p>
-      </section>
-
-    </main>
-
-    <footer>
-      <p><span data-field="name">장동현</span> · 자기소개 페이지</p>
-    </footer>
-
-    <aside class="editor" id="editor" hidden>
-      <div class="editor-panel">
-        <header class="editor-head">
-          <div>
-            <p class="eyebrow">Editor</p>
-            <h2>내 소개 채우기</h2>
-          </div>
-          <button type="button" class="icon-btn" id="close-editor" aria-label="닫기">✕</button>
-        </header>
-
-        <form id="editor-form">
-          <fieldset>
-            <legend>기본 정보</legend>
-            <label>이름 <input name="name" required /></label>
-            <label>짧은 이름 (로고) <input name="shortName" /></label>
-            <label>역할 / 직함 <input name="role" /></label>
-            <label>한 줄 소개 <textarea name="tagline" rows="2"></textarea></label>
-            <label>소개글 <textarea name="about" rows="5"></textarea></label>
-            <label>관심사 (쉼표로 구분) <input name="tags" /></label>
-            <label>사진 아래 문구 <input name="photoCaption" /></label>
-            <label>
-              프로필 사진
-              <input type="file" id="profile-upload" accept="image/*" />
-            </label>
-            <button type="button" class="btn ghost" id="clear-profile">프로필 사진 지우기</button>
-          </fieldset>
-
-          <fieldset>
-            <legend>경험</legend>
-            <div id="experience-fields"></div>
-            <button type="button" class="btn ghost" id="add-experience">경험 추가</button>
-          </fieldset>
-
-          <fieldset>
-            <legend>프로젝트</legend>
-            <div id="project-fields"></div>
-            <button type="button" class="btn ghost" id="add-project">프로젝트 추가</button>
-          </fieldset>
-
-          <fieldset>
-            <legend>갤러리</legend>
-            <p class="hint">여러 장을 한 번에 고를 수 있습니다.</p>
-            <input type="file" id="gallery-upload" accept="image/*" multiple />
-            <div class="editor-gallery" id="editor-gallery"></div>
-          </fieldset>
-
-          <fieldset>
-            <legend>연락처</legend>
-            <label>안내 문구 <input name="contactNote" /></label>
-            <label>이메일 <input name="email" type="email" /></label>
-            <label>GitHub 주소 <input name="github" type="url" placeholder="https://github.com/..." /></label>
-            <label>기타 링크 이름 <input name="otherLabel" placeholder="LinkedIn, 블로그 등" /></label>
-            <label>기타 링크 주소 <input name="otherUrl" type="url" /></label>
-          </fieldset>
-
-          <div class="editor-actions">
-            <button type="submit" class="btn primary">저장하기</button>
-            <button type="button" class="btn ghost" id="export-json">백업 받기</button>
-            <label class="btn ghost file-label">
-              백업 불러오기
-              <input type="file" id="import-json" accept="application/json" hidden />
-            </label>
-            <button type="button" class="btn danger" id="reset-content">처음 상태로</button>
-          </div>
-        </form>
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div>
+      <p class="eyebrow" id="displayRole">Frontend Developer</p>
+      <h1 id="displayName">장동현</h1>
+      <p class="lede" id="displayIntro">장동현 입니다.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn primary">연락하기</a>
+        <a href="#gallery" class="btn ghost">작업물 보기</a>
       </div>
-    </aside>
+    </div>
+    <figure class="portrait">
+      <div class="portrait-frame" id="portraitFrame" title="클릭하여 프로필 사진 변경">
+        <img id="displayPortrait" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="프로필 사진" />
+        <div class="portrait-fallback" id="portraitFallback" hidden><i class="fa-solid fa-user"></i></div>
+        <div class="portrait-overlay">
+          <i class="fa-solid fa-camera"></i>
+          <span>사진 변경</span>
+        </div>
+      </div>
+      <figcaption id="displayPortraitCaption">홍길동 / 개발자</figcaption>
+      <input type="file" id="portraitFileInput" accept="image/*" style="display: none;" />
+    </figure>
+  </section>
 
-    <script src="app.js"></script>
-  </body>
+  <!-- About Section (내 소개 & 소개 사진) -->
+  <section class="section" id="about">
+    <div class="section-head">
+      <h2>자기소개</h2>
+      <span>About Me</span>
+    </div>
+    <div class="about-text" id="displayAboutText">
+ㅁ
+    </div>
+
+    <!-- About Me Custom Photos -->
+    <div style="margin-top: 28px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
+        <h3 style="font-size: 1.1rem; margin:0;">내 소개 사진 / 일상</h3>
+        <button class="btn ghost" id="btnAddAboutPhotoBtn" style="padding: 4px 10px; font-size: 0.85rem;"><i class="fa-solid fa-plus"></i> 사진 추가</button>
+      </div>
+      <input type="file" id="aboutPhotoInput" accept="image/*" multiple style="display: none;" />
+      
+      <div class="about-photo-grid" id="aboutPhotoGrid">
+        <!-- Dynamic about photos -->
+      </div>
+    </div>
+
+    <ul class="tags" id="displayTags">
+      <li>#JavaScript</li>
+      <li>#React</li>
+      <li>#HTML/CSS</li>
+      <li>#Figma</li>
+      <li>#웹개발</li>
+    </ul>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="section" id="timeline">
+    <div class="section-head">
+      <h2>활동 및 이력</h2>
+      <span>Timeline</span>
+    </div>
+    <ul class="timeline" id="displayTimeline">
+      <!-- Dynamic timeline items -->
+    </ul>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section" id="gallery">
+    <div class="section-head">
+      <h2>포토 갤러리</h2>
+      <span>Gallery & Projects</span>
+    </div>
+    <div class="gallery" id="displayGallery">
+      <!-- Dynamic gallery photos -->
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section contact" id="contact">
+    <div class="section-head">
+      <h2>연락처</h2>
+      <span>Contact</span>
+    </div>
+    <ul class="contact-links" id="displayContact">
+      <!-- Dynamic contact links -->
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© <span id="currentYear"></span> <span id="displayFooterName">홍길동</span>. All rights reserved.</p>
+  </footer>
+
+  <!-- Slide-in Editor Panel -->
+  <aside class="editor" id="editor" hidden>
+    <div class="editor-panel">
+      <div class="editor-head">
+        <h2>내용 & 사진 편집</h2>
+        <button class="icon-btn" id="btnCloseEditor">&times;</button>
+      </div>
+
+      <!-- Hero & Profile Photo -->
+      <fieldset>
+        <legend>기본 정보 & 프로필 사진</legend>
+        <label>
+          이름:
+          <input type="text" id="inputName" />
+        </label>
+        <label>
+          직무 / 한줄 수식어:
+          <input type="text" id="inputRole" />
+        </label>
+        <label>
+          소개 문구:
+          <textarea id="inputIntro" rows="2"></textarea>
+        </label>
+        <label>
+          프로필 사진 업로드 (내 PC):
+          <input type="file" id="inputPortraitFile" accept="image/*" />
+        </label>
+        <label>
+          또는 프로필 사진 URL:
+          <input type="url" id="inputPortraitUrl" placeholder="https://..." />
+        </label>
+        <label>
+          사진 캡션:
+          <input type="text" id="inputPortraitCaption" />
+        </label>
+      </fieldset>
+
+      <!-- About & Intro Photos -->
+      <fieldset>
+        <legend>자기소개 & 소개 사진</legend>
+        <label>
+          상세 자기소개 내용:
+          <textarea id="inputAboutText" rows="4"></textarea>
+        </label>
+        <label>
+          태그 목록 (쉼표 , 로 구분):
+          <input type="text" id="inputTags" placeholder="React, JavaScript, 여행, 코딩" />
+        </label>
+        <div style="margin-top: 10px;">
+          <strong>내 소개 사진 추가:</strong>
+          <div class="upload-box" id="editorAboutDropzone">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <span>내 소개 사진 파일 선택 또는 드래그</span>
+            <input type="file" id="editorAboutFileInput" accept="image/*" multiple style="display:none;" />
+          </div>
+          <div class="editor-gallery" id="editorAboutGallery"></div>
+        </div>
+      </fieldset>
+
+      <!-- Main Gallery Photos -->
+      <fieldset>
+        <legend>갤러리 & 활동 사진</legend>
+        <div class="upload-box" id="editorGalleryDropzone">
+          <i class="fa-solid fa-images"></i>
+          <span>갤러리 사진 파일 선택 또는 드래그</span>
+          <input type="file" id="editorGalleryFileInput" accept="image/*" multiple style="display:none;" />
+        </div>
+        <div class="editor-gallery" id="editorGalleryList"></div>
+      </fieldset>
+
+      <!-- Contact -->
+      <fieldset>
+        <legend>연락처</legend>
+        <label>
+          이메일:
+          <input type="email" id="inputEmail" placeholder="example@email.com" />
+        </label>
+        <label>
+          GitHub:
+          <input type="text" id="inputGithub" placeholder="github.com/username" />
+        </label>
+        <label>
+          블로그 / SNS:
+          <input type="text" id="inputBlog" placeholder="myblog.com" />
+        </label>
+        <label>
+          전화번호:
+          <input type="text" id="inputPhone" placeholder="010-1234-5678" />
+        </label>
+      </fieldset>
+
+      <!-- Actions -->
+      <div class="editor-actions" style="margin-top: 20px;">
+        <button class="btn primary" id="btnSaveEditor"><i class="fa-solid fa-floppy-disk"></i> 저장하기</button>
+        <button class="btn ghost" id="btnExportJson"><i class="fa-solid fa-download"></i> 백업(JSON)</button>
+        <button class="btn danger" id="btnResetData"><i class="fa-solid fa-rotate-left"></i> 기본값 초기화</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox hidden" id="lightbox">
+    <img id="lightboxImg" src="" alt="확대 이미지" />
+  </div>
+
+  <!-- Toast -->
+  <div class="toast hidden" id="toast">저장되었습니다.</div>
+
+  <script src="app.js"></script>
+</body>
 </html>
