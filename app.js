@@ -6,8 +6,8 @@ const DEFAULT_DATA = {
   name: '장동현',
   role: '학생',
   intro: '',
-  portrait: '',
-  portraitCaption: '홍길동 / 개발자',
+  portrait: 'Public/IMG_6526.jpeg',
+  portraitCaption: '장동현',
   aboutText: ``,
   tags: ['미식축구', '농구', '게임'],
   contact: {
@@ -34,6 +34,7 @@ class PortfolioManager {
         return {
           ...DEFAULT_DATA,
           ...parsed,
+          portrait: parsed.portrait || DEFAULT_DATA.portrait,
           contact: { ...DEFAULT_DATA.contact, ...(parsed.contact || {}) },
           aboutPhotos: parsed.aboutPhotos || DEFAULT_DATA.aboutPhotos,
           timeline: parsed.timeline || DEFAULT_DATA.timeline,
