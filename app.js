@@ -10,18 +10,6 @@ const DEFAULT_DATA = {
   portraitCaption: '홍길동 / 개발자',
   aboutText: ``,
   tags: ['미식축구', '농구', '게임'],
-  aboutPhotos: [
-    {
-      id: 'about-1',
-      title: '일상 사진',
-      image: ' '
-    },
-    {
-      id: 'about-2',
-      title: '여행 스냅',
-      image: ' '
-    }
-  ],
   contact: {
     email: 'example@email.com',
     github: 'github.com/username',
