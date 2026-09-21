@@ -1,377 +1,333 @@
 /**
- * My Portfolio Studio - Interactive Profile & Photo Management
+ * introduce_web - Interactive Portfolio & Photo Editor
  */
 
-// Default initial state
 const DEFAULT_DATA = {
-  theme: 'light',
-  profileImage: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
-  texts: {
-    heroTag: '✨ 안녕하세요! 웹을 좋아하는 개발자 / 크리에이터입니다.',
-    heroName: '홍길동',
-    heroTitle: 'Frontend Developer & Designer',
-    heroIntro: '새로운 도전을 즐기며, 직관적이고 아름다운 사용자 경험을 만들어가는 것을 좋아합니다. 문제를 해결하는 과정에서 큰 즐거움을 느낍니다.',
-    emailText: 'example@email.com',
-    githubText: 'github.com/username',
-    blogText: 'myblog.com',
-    phoneText: '010-1234-5678',
-    infoBirth: '2000. 01. 01 (20대)',
-    infoLocation: '대한민국 서울',
-    infoEdu: '컴퓨터공학과 재학 / 졸업',
-    infoHobby: '사진 촬영, 여행, 카페 탐방, 코딩',
-    infoMotto: '"어제보다 오늘 한 걸음 더 성장하자"',
-    footerMsg: '방문해 주셔서 감사합니다! 언제든 편하게 연락 주세요 💌',
-    footerAuthor: '홍길동'
-  },
+  name: '홍길동',
+  role: 'Frontend Developer',
+  intro: '새로운 기술을 배우고 사람들에게 가치를 주는 웹 서비스를 만듭니다.',
+  portrait: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+  portraitCaption: '홍길동 / 개발자',
+  aboutText: `안녕하세요! 문제를 해결하는 것을 즐기며 사용자에게 직관적이고 아름다운 UI/UX를 제공하는 웹 프론트엔드 개발자입니다.\n팀원들과 원활하게 소통하고 협업하는 것을 중요하게 생각합니다.`,
+  tags: ['JavaScript', 'React', 'HTML/CSS', 'Figma', '웹개발'],
   aboutPhotos: [
     {
       id: 'about-1',
-      title: '나의 일상 & 취미',
+      title: '일상 사진',
       image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80'
     },
     {
       id: 'about-2',
-      title: '여행지에서',
+      title: '여행 스냅',
       image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80'
-    }
-  ],
-  skills: [
-    { name: 'HTML5 & CSS3 / SCSS', level: 90 },
-    { name: 'JavaScript / TypeScript', level: 85 },
-    { name: 'React & Next.js', level: 80 },
-    { name: 'UI / UX Design (Figma)', level: 75 },
-    { name: 'Git & GitHub', level: 85 }
-  ],
-  gallery: [
-    {
-      id: 'gallery-1',
-      title: '개인 웹 프로젝트',
-      desc: '반응형 디자인과 모던 UI를 적용한 포트폴리오 웹사이트 제작',
-      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80',
-      tags: ['Project', 'Web', 'React']
-    },
-    {
-      id: 'gallery-2',
-      title: '제주도 여행 스냅',
-      desc: '에메랄드빛 바다와 노을을 담은 일상 여행 기록',
-      image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80',
-      tags: ['Travel', 'Photo', 'Daily']
-    },
-    {
-      id: 'gallery-3',
-      title: '작업 데스크 셋업',
-      desc: '생산성을 높여주는 미니멀한 듀얼 모니터 데스크 환경',
-      image: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80',
-      tags: ['Workspace', 'Setup']
     }
   ],
   timeline: [
     {
-      id: 'time-1',
-      title: '멋쟁이사자처럼 프론트엔드 부트캠프',
       period: '2023.03 - 2023.09',
-      role: '프론트엔드 수료 및 팀 프로젝트 우수상',
-      desc: '웹 기초부터 컴포넌트 아키텍처, 실무 협업 프로젝트를 완수했습니다.'
+      title: '프론트엔드 부트캠프 수료',
+      desc: '모던 자바스크립트 및 컴포넌트 아키텍처 학습'
     },
     {
-      id: 'time-2',
-      title: 'IT 스타트업 인턴십',
       period: '2023.10 - 2024.02',
-      role: '웹 프론트엔드 개발 인턴',
-      desc: '고객 관리 대시보드 UI 구현 및 웹 성능 최적화 작업을 담당했습니다.'
+      title: '웹 개발 프로젝트 진행',
+      desc: '반응형 포트폴리오 및 대시보드 UI 제작'
     }
-  ]
+  ],
+  gallery: [
+    {
+      id: 'g-1',
+      title: '작업 프로젝트',
+      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80'
+    },
+    {
+      id: 'g-2',
+      title: '데스크 환경',
+      image: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80'
+    }
+  ],
+  contact: {
+    email: 'example@email.com',
+    github: 'github.com/username',
+    blog: 'myblog.com',
+    phone: '010-1234-5678'
+  }
 };
 
-class PortfolioApp {
+class PortfolioManager {
   constructor() {
-    this.data = this.loadData();
-    this.isEditMode = false;
-    this.urlTargetCallback = null;
-
+    this.data = this.load();
     this.initDOM();
     this.bindEvents();
     this.render();
   }
 
-  // Load from localStorage with defaults fallback
-  loadData() {
+  load() {
     try {
-      const stored = localStorage.getItem('my_portfolio_data');
+      const stored = localStorage.getItem('introduce_web_data');
       if (stored) {
         const parsed = JSON.parse(stored);
         return {
           ...DEFAULT_DATA,
           ...parsed,
-          texts: { ...DEFAULT_DATA.texts, ...(parsed.texts || {}) },
+          contact: { ...DEFAULT_DATA.contact, ...(parsed.contact || {}) },
           aboutPhotos: parsed.aboutPhotos || DEFAULT_DATA.aboutPhotos,
-          skills: parsed.skills || DEFAULT_DATA.skills,
+          timeline: parsed.timeline || DEFAULT_DATA.timeline,
           gallery: parsed.gallery || DEFAULT_DATA.gallery,
-          timeline: parsed.timeline || DEFAULT_DATA.timeline
+          tags: parsed.tags || DEFAULT_DATA.tags
         };
       }
     } catch (e) {
-      console.warn('Failed to load from storage:', e);
+      console.warn('Storage load error:', e);
     }
     return JSON.parse(JSON.stringify(DEFAULT_DATA));
   }
 
-  // Save to localStorage
-  saveData() {
-    this.collectDOMData();
+  save() {
     try {
-      localStorage.setItem('my_portfolio_data', JSON.stringify(this.data));
-      this.showToast('✅ 변경사항이 안전하게 저장되었습니다!');
+      localStorage.setItem('introduce_web_data', JSON.stringify(this.data));
+      this.showToast('✅ 저장되었습니다!');
     } catch (e) {
-      console.error('Storage quota exceeded or error:', e);
-      this.showToast('⚠️ 브라우저 저장소 용량이 초과되었습니다. 이미지 크기를 줄여보세요.');
+      console.error('Storage save error:', e);
+      this.showToast('⚠️ 저장 용량 초과. 사진 크기를 확인하세요.');
     }
   }
 
   initDOM() {
-    // Toolbar Buttons
-    this.btnEditMode = document.getElementById('btnEditMode');
-    this.btnSave = document.getElementById('btnSave');
-    this.btnTheme = document.getElementById('btnTheme');
-    this.btnMore = document.getElementById('btnMore');
-    this.moreMenu = document.getElementById('moreMenu');
-    this.editBanner = document.getElementById('editBanner');
+    // Topbar & Displays
+    this.displayLogo = document.getElementById('displayLogo');
+    this.displayRole = document.getElementById('displayRole');
+    this.displayName = document.getElementById('displayName');
+    this.displayIntro = document.getElementById('displayIntro');
+    this.displayPortrait = document.getElementById('displayPortrait');
+    this.portraitFallback = document.getElementById('portraitFallback');
+    this.displayPortraitCaption = document.getElementById('displayPortraitCaption');
+    this.displayAboutText = document.getElementById('displayAboutText');
+    this.aboutPhotoGrid = document.getElementById('aboutPhotoGrid');
+    this.displayTags = document.getElementById('displayTags');
+    this.displayTimeline = document.getElementById('displayTimeline');
+    this.displayGallery = document.getElementById('displayGallery');
+    this.displayContact = document.getElementById('displayContact');
+    this.displayFooterName = document.getElementById('displayFooterName');
+    this.currentYear = document.getElementById('currentYear');
 
-    // Profile photo elements
-    this.profileContainer = document.getElementById('profileContainer');
-    this.profileImage = document.getElementById('profileImage');
-    this.profileFileInput = document.getElementById('profileFileInput');
-    this.btnProfileFile = document.getElementById('btnProfileFile');
-    this.btnProfileUrl = document.getElementById('btnProfileUrl');
-    this.btnProfileDelete = document.getElementById('btnProfileDelete');
+    // Portrait Quick Upload
+    this.portraitFrame = document.getElementById('portraitFrame');
+    this.portraitFileInput = document.getElementById('portraitFileInput');
 
-    // About Me Photos Elements
-    this.btnAddAboutPhoto = document.getElementById('btnAddAboutPhoto');
-    this.aboutPhotoDropzone = document.getElementById('aboutPhotoDropzone');
-    this.aboutPhotoFileInput = document.getElementById('aboutPhotoFileInput');
-    this.aboutPhotosGrid = document.getElementById('aboutPhotosGrid');
+    // About Photo Quick Upload
+    this.btnAddAboutPhotoBtn = document.getElementById('btnAddAboutPhotoBtn');
+    this.aboutPhotoInput = document.getElementById('aboutPhotoInput');
 
-    // Main Gallery Elements
-    this.galleryGrid = document.getElementById('galleryGrid');
-    this.galleryDropZone = document.getElementById('galleryDropZone');
-    this.galleryFileInput = document.getElementById('galleryFileInput');
-    this.btnAddPhoto = document.getElementById('btnAddPhoto');
-
-    // Skills & Timeline
-    this.skillsList = document.getElementById('skillsList');
-    this.btnAddSkill = document.getElementById('btnAddSkill');
-    this.timelineList = document.getElementById('timelineList');
-    this.btnAddTimeline = document.getElementById('btnAddTimeline');
-
-    // URL Modal
-    this.urlModal = document.getElementById('urlModal');
-    this.urlInput = document.getElementById('urlInput');
-    this.urlPreview = document.getElementById('urlPreview');
-    this.urlPreviewImg = document.getElementById('urlPreviewImg');
-    this.btnConfirmUrlModal = document.getElementById('btnConfirmUrlModal');
-    this.btnCancelUrlModal = document.getElementById('btnCancelUrlModal');
-    this.btnCloseUrlModal = document.getElementById('btnCloseUrlModal');
-
-    // Lightbox Modal
-    this.lightboxModal = document.getElementById('lightboxModal');
-    this.lightboxImg = document.getElementById('lightboxImg');
-    this.lightboxCaption = document.getElementById('lightboxCaption');
-    this.btnCloseLightbox = document.getElementById('btnCloseLightbox');
-
-    // Dropdown Actions
+    // Editor Sidebar
+    this.editor = document.getElementById('editor');
+    this.btnOpenEditor = document.getElementById('btnOpenEditor');
+    this.btnCloseEditor = document.getElementById('btnCloseEditor');
+    this.btnSaveEditor = document.getElementById('btnSaveEditor');
     this.btnExportJson = document.getElementById('btnExportJson');
-    this.importJsonInput = document.getElementById('importJsonInput');
-    this.btnPrint = document.getElementById('btnPrint');
-    this.btnReset = document.getElementById('btnReset');
+    this.btnResetData = document.getElementById('btnResetData');
 
-    // Toast
+    // Inputs
+    this.inputName = document.getElementById('inputName');
+    this.inputRole = document.getElementById('inputRole');
+    this.inputIntro = document.getElementById('inputIntro');
+    this.inputPortraitFile = document.getElementById('inputPortraitFile');
+    this.inputPortraitUrl = document.getElementById('inputPortraitUrl');
+    this.inputPortraitCaption = document.getElementById('inputPortraitCaption');
+    this.inputAboutText = document.getElementById('inputAboutText');
+    this.inputTags = document.getElementById('inputTags');
+    this.inputEmail = document.getElementById('inputEmail');
+    this.inputGithub = document.getElementById('inputGithub');
+    this.inputBlog = document.getElementById('inputBlog');
+    this.inputPhone = document.getElementById('inputPhone');
+
+    // Editor Dropzones
+    this.editorAboutDropzone = document.getElementById('editorAboutDropzone');
+    this.editorAboutFileInput = document.getElementById('editorAboutFileInput');
+    this.editorAboutGallery = document.getElementById('editorAboutGallery');
+
+    this.editorGalleryDropzone = document.getElementById('editorGalleryDropzone');
+    this.editorGalleryFileInput = document.getElementById('editorGalleryFileInput');
+    this.editorGalleryList = document.getElementById('editorGalleryList');
+
+    // Lightbox & Toast
+    this.lightbox = document.getElementById('lightbox');
+    this.lightboxImg = document.getElementById('lightboxImg');
     this.toast = document.getElementById('toast');
-    this.toastMessage = document.getElementById('toastMessage');
 
-    // Year
-    const yearEl = document.getElementById('currentYear');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+    if (this.currentYear) {
+      this.currentYear.textContent = new Date().getFullYear();
+    }
   }
 
   bindEvents() {
-    // Toolbar actions
-    this.btnEditMode.addEventListener('click', () => this.toggleEditMode());
-    this.btnSave.addEventListener('click', () => this.saveData());
-    this.btnTheme.addEventListener('click', () => this.toggleTheme());
-
-    this.btnMore.addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.moreMenu.classList.toggle('show');
-    });
-    document.addEventListener('click', () => {
-      this.moreMenu.classList.remove('show');
-    });
-
-    this.btnReset.addEventListener('click', () => this.resetData());
-    this.btnExportJson.addEventListener('click', () => this.exportJson());
-    this.importJsonInput.addEventListener('change', (e) => this.importJson(e));
-    this.btnPrint.addEventListener('click', () => window.print());
-
-    // ==========================================
-    // 1. Profile Image Events
-    // ==========================================
-    const triggerProfileUpload = () => {
-      this.profileFileInput.value = '';
-      this.profileFileInput.click();
-    };
-
-    this.profileContainer.addEventListener('click', triggerProfileUpload);
-    this.btnProfileFile.addEventListener('click', (e) => {
-      e.stopPropagation();
-      triggerProfileUpload();
-    });
-
-    this.profileFileInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        this.processImageFile(file, (dataUrl) => {
-          this.data.profileImage = dataUrl;
-          this.profileImage.src = dataUrl;
-          this.showToast('📷 프로필 사진이 성공적으로 변경되었습니다!');
-          this.saveData();
-        });
-      }
-    });
-
-    // Profile Drag and drop
-    ['dragenter', 'dragover'].forEach(name => {
-      this.profileContainer.addEventListener(name, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.profileContainer.style.borderColor = 'var(--primary)';
+    // Open / Close Editor
+    if (this.btnOpenEditor) {
+      this.btnOpenEditor.addEventListener('click', () => this.openEditor());
+    }
+    if (this.btnCloseEditor) {
+      this.btnCloseEditor.addEventListener('click', () => this.closeEditor());
+    }
+    if (this.editor) {
+      this.editor.addEventListener('click', (e) => {
+        if (e.target === this.editor) this.closeEditor();
       });
-    });
+    }
 
-    ['dragleave', 'drop'].forEach(name => {
-      this.profileContainer.addEventListener(name, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.profileContainer.style.borderColor = '';
+    // Save & Reset in Editor
+    if (this.btnSaveEditor) {
+      this.btnSaveEditor.addEventListener('click', () => {
+        this.syncEditorToData();
+        this.render();
+        this.save();
+        this.closeEditor();
       });
-    });
+    }
 
-    this.profileContainer.addEventListener('drop', (e) => {
-      const file = e.dataTransfer.files[0];
-      if (file && file.type.startsWith('image/')) {
-        this.processImageFile(file, (dataUrl) => {
-          this.data.profileImage = dataUrl;
-          this.profileImage.src = dataUrl;
-          this.showToast('📷 프로필 사진이 업데이트되었습니다!');
-          this.saveData();
-        });
-      }
-    });
-
-    this.btnProfileUrl.addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.openUrlModal('프로필 사진 URL 입력', (url) => {
-        this.data.profileImage = url;
-        this.profileImage.src = url;
-        this.showToast('📷 프로필 사진이 URL로 변경되었습니다!');
-        this.saveData();
+    if (this.btnResetData) {
+      this.btnResetData.addEventListener('click', () => {
+        if (confirm('기본 예시 데이터로 초기화하시겠습니까?')) {
+          this.data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+          localStorage.removeItem('introduce_web_data');
+          this.render();
+          this.populateEditor();
+          this.showToast('기본값으로 초기화되었습니다.');
+        }
       });
-    });
+    }
 
-    this.btnProfileDelete.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (confirm('프로필 사진을 기본 이미지로 초기화할까요?')) {
-        this.data.profileImage = DEFAULT_DATA.profileImage;
-        this.profileImage.src = this.data.profileImage;
-        this.showToast('프로필 사진이 초기화되었습니다.');
-        this.saveData();
-      }
-    });
+    if (this.btnExportJson) {
+      this.btnExportJson.addEventListener('click', () => this.exportJson());
+    }
 
-    // ==========================================
-    // 2. About Me Section Photos (내 소개 사진)
-    // ==========================================
-    const triggerAboutPhotoUpload = () => {
-      this.aboutPhotoFileInput.value = '';
-      this.aboutPhotoFileInput.click();
-    };
-
-    this.btnAddAboutPhoto.addEventListener('click', triggerAboutPhotoUpload);
-    this.aboutPhotoDropzone.addEventListener('click', triggerAboutPhotoUpload);
-
-    this.aboutPhotoFileInput.addEventListener('change', (e) => {
-      const files = Array.from(e.target.files);
-      if (files.length > 0) {
-        this.handleAboutPhotosUpload(files);
-      }
-    });
-
-    ['dragenter', 'dragover'].forEach(name => {
-      this.aboutPhotoDropzone.addEventListener(name, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.aboutPhotoDropzone.classList.add('dragover');
+    // Direct Portrait Upload (Click on Photo)
+    if (this.portraitFrame && this.portraitFileInput) {
+      this.portraitFrame.addEventListener('click', () => {
+        this.portraitFileInput.value = '';
+        this.portraitFileInput.click();
       });
-    });
 
-    ['dragleave', 'drop'].forEach(name => {
-      this.aboutPhotoDropzone.addEventListener(name, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.aboutPhotoDropzone.classList.remove('dragover');
+      this.portraitFileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          this.compressImage(file, (dataUrl) => {
+            this.data.portrait = dataUrl;
+            this.render();
+            this.save();
+            this.showToast('📷 프로필 사진이 변경되었습니다!');
+          });
+        }
       });
-    });
+    }
 
-    this.aboutPhotoDropzone.addEventListener('drop', (e) => {
-      const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
-      if (files.length > 0) {
-        this.handleAboutPhotosUpload(files);
-      }
-    });
-
-    // ==========================================
-    // 3. Main Gallery Photos
-    // ==========================================
-    const triggerGalleryUpload = () => {
-      this.galleryFileInput.value = '';
-      this.galleryFileInput.click();
-    };
-
-    this.btnAddPhoto.addEventListener('click', triggerGalleryUpload);
-    this.galleryDropZone.addEventListener('click', triggerGalleryUpload);
-
-    this.galleryFileInput.addEventListener('change', (e) => {
-      const files = Array.from(e.target.files);
-      if (files.length > 0) {
-        this.handleMultipleGalleryUpload(files);
-      }
-    });
-
-    ['dragenter', 'dragover'].forEach(name => {
-      this.galleryDropZone.addEventListener(name, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.galleryDropZone.classList.add('dragover');
+    // Portrait Upload inside Editor Panel
+    if (this.inputPortraitFile) {
+      this.inputPortraitFile.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          this.compressImage(file, (dataUrl) => {
+            this.data.portrait = dataUrl;
+            if (this.inputPortraitUrl) this.inputPortraitUrl.value = '';
+            this.render();
+            this.save();
+            this.showToast('📷 프로필 사진이 업로드되었습니다.');
+          });
+        }
       });
-    });
+    }
 
-    ['dragleave', 'drop'].forEach(name => {
-      this.galleryDropZone.addEventListener(name, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        this.galleryDropZone.classList.remove('dragover');
+    if (this.inputPortraitUrl) {
+      this.inputPortraitUrl.addEventListener('change', () => {
+        const val = this.inputPortraitUrl.value.trim();
+        if (val) {
+          this.data.portrait = val;
+          this.render();
+          this.save();
+        }
       });
+    }
+
+    // About Photo Button Upload (Direct)
+    if (this.btnAddAboutPhotoBtn && this.aboutPhotoInput) {
+      this.btnAddAboutPhotoBtn.addEventListener('click', () => {
+        this.aboutPhotoInput.value = '';
+        this.aboutPhotoInput.click();
+      });
+
+      this.aboutPhotoInput.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        if (files.length > 0) {
+          this.handleAboutFiles(files);
+        }
+      });
+    }
+
+    // Editor About Photo Dropzone
+    if (this.editorAboutDropzone && this.editorAboutFileInput) {
+      this.editorAboutDropzone.addEventListener('click', () => {
+        this.editorAboutFileInput.value = '';
+        this.editorAboutFileInput.click();
+      });
+
+      this.editorAboutFileInput.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        if (files.length > 0) {
+          this.handleAboutFiles(files);
+        }
+      });
+    }
+
+    // Editor Gallery Dropzone
+    if (this.editorGalleryDropzone && this.editorGalleryFileInput) {
+      this.editorGalleryDropzone.addEventListener('click', () => {
+        this.editorGalleryFileInput.value = '';
+        this.editorGalleryFileInput.click();
+      });
+
+      this.editorGalleryFileInput.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        if (files.length > 0) {
+          this.handleGalleryFiles(files);
+        }
+      });
+    }
+
+    // Direct On-Page Inline Editing for Texts!
+    this.makeDirectlyEditable(this.displayName, (val) => {
+      this.data.name = val;
+      if (this.displayLogo) this.displayLogo.textContent = val;
+      if (this.displayFooterName) this.displayFooterName.textContent = val;
+      this.save();
     });
 
-    this.galleryDropZone.addEventListener('drop', (e) => {
-      const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
-      if (files.length > 0) {
-        this.handleMultipleGalleryUpload(files);
-      }
+    this.makeDirectlyEditable(this.displayRole, (val) => {
+      this.data.role = val;
+      this.save();
     });
 
-    // ==========================================
-    // 4. Clipboard Paste Support (Ctrl+V / Cmd+V)
-    // ==========================================
+    this.makeDirectlyEditable(this.displayIntro, (val) => {
+      this.data.intro = val;
+      this.save();
+    });
+
+    this.makeDirectlyEditable(this.displayPortraitCaption, (val) => {
+      this.data.portraitCaption = val;
+      this.save();
+    });
+
+    this.makeDirectlyEditable(this.displayAboutText, (val) => {
+      this.data.aboutText = val;
+      this.save();
+    });
+
+    // Lightbox Close
+    if (this.lightbox) {
+      this.lightbox.addEventListener('click', () => {
+        this.lightbox.classList.add('hidden');
+      });
+    }
+
+    // Clipboard Paste (Ctrl+V / Cmd+V) to Add Photo
     window.addEventListener('paste', (e) => {
       const items = e.clipboardData?.items;
       if (!items) return;
@@ -379,61 +335,54 @@ class PortfolioApp {
         if (item.type.startsWith('image/')) {
           const file = item.getAsFile();
           if (file) {
-            this.processImageFile(file, (dataUrl) => {
-              const newItem = {
+            this.compressImage(file, (dataUrl) => {
+              this.data.aboutPhotos.push({
                 id: 'about-' + Date.now(),
                 title: '클립보드 사진',
                 image: dataUrl
-              };
-              this.data.aboutPhotos.push(newItem);
-              this.renderAboutPhotos();
+              });
+              this.render();
+              this.save();
               this.showToast('📋 클립보드 사진이 내 소개에 추가되었습니다!');
-              this.saveData();
             });
             break;
           }
         }
       }
     });
-
-    // Add Skill & Timeline
-    this.btnAddSkill.addEventListener('click', () => this.addSkillItem());
-    this.btnAddTimeline.addEventListener('click', () => this.addTimelineItem());
-
-    // Modal controls
-    this.btnCloseUrlModal.addEventListener('click', () => this.closeUrlModal());
-    this.btnCancelUrlModal.addEventListener('click', () => this.closeUrlModal());
-    this.urlModal.querySelector('.modal-backdrop').addEventListener('click', () => this.closeUrlModal());
-
-    this.btnConfirmUrlModal.addEventListener('click', () => {
-      const url = this.urlInput.value.trim();
-      if (url && this.urlTargetCallback) {
-        this.urlTargetCallback(url);
-        this.closeUrlModal();
-      } else {
-        alert('올바른 이미지 URL을 입력해주세요.');
-      }
-    });
-
-    this.urlInput.addEventListener('input', () => {
-      const val = this.urlInput.value.trim();
-      if (val) {
-        this.urlPreviewImg.src = val;
-        this.urlPreviewImg.classList.remove('hidden');
-      } else {
-        this.urlPreviewImg.classList.add('hidden');
-      }
-    });
-
-    // Lightbox Controls
-    this.btnCloseLightbox.addEventListener('click', () => this.closeLightbox());
-    this.lightboxModal.querySelector('.modal-backdrop').addEventListener('click', () => this.closeLightbox());
   }
 
-  // Client-side Smart Image Compression & Resizing
-  processImageFile(file, callback) {
+  // Makes an HTML element directly editable by clicking on it
+  makeDirectlyEditable(el, callback) {
+    if (!el) return;
+    el.setAttribute('contenteditable', 'true');
+    el.setAttribute('title', '클릭하여 텍스트를 바로 수정할 수 있습니다');
+    el.style.outline = 'none';
+    el.style.cursor = 'text';
+
+    el.addEventListener('focus', () => {
+      el.style.backgroundColor = 'rgba(0,0,0,0.04)';
+      el.style.borderRadius = '3px';
+    });
+
+    el.addEventListener('blur', () => {
+      el.style.backgroundColor = 'transparent';
+      const text = el.innerText.trim();
+      callback(text);
+    });
+
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && el.tagName !== 'DIV' && el.tagName !== 'P') {
+        e.preventDefault();
+        el.blur();
+      }
+    });
+  }
+
+  // Compress images to fit comfortably in localStorage
+  compressImage(file, callback) {
     if (!file.type.startsWith('image/')) {
-      alert('이미지 파일(JPG, PNG, WebP 등)만 업로드할 수 있습니다.');
+      alert('이미지 파일만 업로드 가능합니다.');
       return;
     }
 
@@ -443,8 +392,6 @@ class PortfolioApp {
       img.onload = () => {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
-
-        // Target maximum dimension
         const MAX_DIM = 1200;
         let width = img.width;
         let height = img.height;
@@ -465,476 +412,269 @@ class PortfolioApp {
         canvas.height = height;
         ctx.drawImage(img, 0, 0, width, height);
 
-        const format = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
-        const compressedDataUrl = canvas.toDataURL(format, 0.85);
-        callback(compressedDataUrl);
-      };
-      img.onerror = () => {
-        alert('이미지를 불러오는 중 문제가 발생했습니다.');
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+        callback(dataUrl);
       };
       img.src = e.target.result;
     };
     reader.readAsDataURL(file);
   }
 
-  handleAboutPhotosUpload(files) {
-    let loadedCount = 0;
+  handleAboutFiles(files) {
+    let loaded = 0;
     files.forEach(file => {
-      this.processImageFile(file, (dataUrl) => {
-        const newItem = {
+      this.compressImage(file, (dataUrl) => {
+        this.data.aboutPhotos.push({
           id: 'about-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
           title: file.name.replace(/\.[^/.]+$/, "") || '소개 사진',
           image: dataUrl
-        };
-        this.data.aboutPhotos.push(newItem);
-        loadedCount++;
-        if (loadedCount === files.length) {
-          this.renderAboutPhotos();
-          this.showToast(`📸 내 소개에 ${files.length}장의 사진이 추가되었습니다!`);
-          this.saveData();
-        }
-      });
-    });
-  }
-
-  handleMultipleGalleryUpload(files) {
-    let loadedCount = 0;
-    files.forEach(file => {
-      this.processImageFile(file, (dataUrl) => {
-        const newItem = {
-          id: 'gallery-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
-          title: file.name.replace(/\.[^/.]+$/, "") || '새로운 사진',
-          desc: '사진에 대한 설명을 여기에 적어보세요.',
-          image: dataUrl,
-          tags: ['Photo']
-        };
-        this.data.gallery.unshift(newItem);
-        loadedCount++;
-        if (loadedCount === files.length) {
-          this.renderGallery();
-          this.showToast(`📸 갤러리에 ${files.length}장의 사진이 추가되었습니다!`);
-          this.saveData();
-        }
-      });
-    });
-  }
-
-  // ==========================================
-  // Render Functions
-  // ==========================================
-  render() {
-    // Theme
-    if (this.data.theme === 'dark') {
-      document.body.classList.add('theme-dark');
-      this.btnTheme.innerHTML = '<i class="fa-solid fa-sun"></i>';
-    } else {
-      document.body.classList.remove('theme-dark');
-      this.btnTheme.innerHTML = '<i class="fa-solid fa-moon"></i>';
-    }
-
-    // Profile Image
-    this.profileImage.src = this.data.profileImage || DEFAULT_DATA.profileImage;
-
-    // Text fields
-    document.querySelectorAll('.editable[data-key]').forEach(el => {
-      const key = el.getAttribute('data-key');
-      if (key && this.data.texts[key] !== undefined) {
-        el.textContent = this.data.texts[key];
-      }
-    });
-
-    // Links update
-    const chipEmail = document.getElementById('chipEmail');
-    if (chipEmail && this.data.texts.emailText) chipEmail.href = `mailto:${this.data.texts.emailText}`;
-
-    const chipPhone = document.getElementById('chipPhone');
-    if (chipPhone && this.data.texts.phoneText) chipPhone.href = `tel:${this.data.texts.phoneText}`;
-
-    const chipGithub = document.getElementById('chipGithub');
-    if (chipGithub && this.data.texts.githubText) {
-      let g = this.data.texts.githubText;
-      if (!g.startsWith('http')) g = 'https://' + g;
-      chipGithub.href = g;
-    }
-
-    const chipBlog = document.getElementById('chipBlog');
-    if (chipBlog && this.data.texts.blogText) {
-      let b = this.data.texts.blogText;
-      if (!b.startsWith('http')) b = 'https://' + b;
-      chipBlog.href = b;
-    }
-
-    this.renderAboutPhotos();
-    this.renderSkills();
-    this.renderGallery();
-    this.renderTimeline();
-    this.updateEditModeAttributes();
-  }
-
-  renderAboutPhotos() {
-    this.aboutPhotosGrid.innerHTML = '';
-    if (!this.data.aboutPhotos || this.data.aboutPhotos.length === 0) {
-      this.aboutPhotosGrid.innerHTML = `<div style="grid-column: 1/-1; font-size:0.85rem; color:var(--text-muted); text-align:center; padding:12px;">등록된 소개 사진이 없습니다. 상단 버튼이나 영역을 눌러 사진을 추가해보세요!</div>`;
-      return;
-    }
-
-    this.data.aboutPhotos.forEach((item, index) => {
-      const card = document.createElement('div');
-      card.className = 'about-photo-card';
-      card.innerHTML = `
-        <img src="${item.image}" alt="${item.title}" loading="lazy" />
-        <span class="about-photo-caption">${item.title}</span>
-        <button class="about-photo-delete" title="사진 삭제"><i class="fa-solid fa-xmark"></i></button>
-      `;
-
-      // Click to view in Lightbox
-      card.querySelector('img').addEventListener('click', () => {
-        this.openLightbox(item.image, item.title);
-      });
-
-      // Delete
-      card.querySelector('.about-photo-delete').addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (confirm('이 소개 사진을 삭제하시겠습니까?')) {
-          this.data.aboutPhotos.splice(index, 1);
-          this.renderAboutPhotos();
-          this.showToast('소개 사진이 삭제되었습니다.');
-          this.saveData();
-        }
-      });
-
-      this.aboutPhotosGrid.appendChild(card);
-    });
-  }
-
-  renderSkills() {
-    this.skillsList.innerHTML = '';
-    this.data.skills.forEach((skill, index) => {
-      const item = document.createElement('div');
-      item.className = 'skill-item';
-      item.innerHTML = `
-        <div class="skill-header">
-          <span class="skill-name editable" contenteditable="${this.isEditMode}">${skill.name}</span>
-          <span class="skill-pct editable" contenteditable="${this.isEditMode}">${skill.level}%</span>
-        </div>
-        <div class="skill-bar-wrapper">
-          <div class="skill-bar-progress" style="width: ${skill.level}%;"></div>
-        </div>
-        <button class="skill-delete-btn" title="스킬 삭제"><i class="fa-solid fa-xmark"></i></button>
-      `;
-
-      // Change level
-      const pctEl = item.querySelector('.skill-pct');
-      const barEl = item.querySelector('.skill-bar-progress');
-      pctEl.addEventListener('blur', () => {
-        let val = parseInt(pctEl.textContent) || 0;
-        val = Math.max(0, Math.min(100, val));
-        pctEl.textContent = `${val}%`;
-        barEl.style.width = `${val}%`;
-        this.data.skills[index].level = val;
-      });
-
-      const nameEl = item.querySelector('.skill-name');
-      nameEl.addEventListener('blur', () => {
-        this.data.skills[index].name = nameEl.textContent.trim();
-      });
-
-      // Delete
-      item.querySelector('.skill-delete-btn').addEventListener('click', () => {
-        this.data.skills.splice(index, 1);
-        this.renderSkills();
-        this.saveData();
-      });
-
-      this.skillsList.appendChild(item);
-    });
-  }
-
-  renderGallery() {
-    this.galleryGrid.innerHTML = '';
-    this.data.gallery.forEach((card, index) => {
-      const el = document.createElement('div');
-      el.className = 'gallery-card';
-      el.innerHTML = `
-        <div class="gallery-card-img-wrapper">
-          <img src="${card.image}" alt="${card.title}" loading="lazy" />
-          <div class="gallery-card-actions">
-            <button class="gallery-action-btn btn-change-img" title="사진 파일 변경">
-              <i class="fa-solid fa-camera"></i>
-            </button>
-            <button class="gallery-action-btn btn-change-url" title="사진 URL 변경">
-              <i class="fa-solid fa-link"></i>
-            </button>
-            <button class="gallery-action-btn btn-delete" title="카드 삭제">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </div>
-          <input type="file" accept="image/*" class="file-input-hidden card-file-input" />
-        </div>
-        <div class="gallery-card-body">
-          <h3 class="gallery-card-title editable" contenteditable="${this.isEditMode}">${card.title}</h3>
-          <p class="gallery-card-desc editable" contenteditable="${this.isEditMode}">${card.desc}</p>
-          <div class="gallery-card-tags">
-            ${card.tags.map(t => `<span class="gallery-tag editable" contenteditable="${this.isEditMode}">${t}</span>`).join('')}
-          </div>
-        </div>
-      `;
-
-      // Photo Click -> Lightbox (when clicking the image directly)
-      el.querySelector('.gallery-card-img-wrapper img').addEventListener('click', () => {
-        this.openLightbox(card.image, card.title + ' - ' + card.desc);
-      });
-
-      // Photo Replace File
-      const fileInput = el.querySelector('.card-file-input');
-      const btnChangeImg = el.querySelector('.btn-change-img');
-      btnChangeImg.addEventListener('click', (e) => {
-        e.stopPropagation();
-        fileInput.value = '';
-        fileInput.click();
-      });
-
-      fileInput.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          this.processImageFile(file, (dataUrl) => {
-            this.data.gallery[index].image = dataUrl;
-            el.querySelector('img').src = dataUrl;
-            this.showToast('📸 사진이 성공적으로 변경되었습니다!');
-            this.saveData();
-          });
-        }
-      });
-
-      // Photo Replace URL
-      const btnChangeUrl = el.querySelector('.btn-change-url');
-      btnChangeUrl.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.openUrlModal('카드 사진 URL 입력', (url) => {
-          this.data.gallery[index].image = url;
-          el.querySelector('img').src = url;
-          this.showToast('📸 사진 URL이 적용되었습니다!');
-          this.saveData();
         });
-      });
-
-      // Card Delete
-      el.querySelector('.btn-delete').addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (confirm('이 사진 카드를 삭제할까요?')) {
-          this.data.gallery.splice(index, 1);
-          this.renderGallery();
-          this.showToast('사진 카드가 삭제되었습니다.');
-          this.saveData();
+        loaded++;
+        if (loaded === files.length) {
+          this.render();
+          this.save();
+          this.showToast(`📸 내 소개 사진 ${files.length}장이 추가되었습니다!`);
         }
       });
-
-      // Live Text Edits
-      const titleEl = el.querySelector('.gallery-card-title');
-      titleEl.addEventListener('blur', () => {
-        this.data.gallery[index].title = titleEl.textContent.trim();
-      });
-
-      const descEl = el.querySelector('.gallery-card-desc');
-      descEl.addEventListener('blur', () => {
-        this.data.gallery[index].desc = descEl.textContent.trim();
-      });
-
-      this.galleryGrid.appendChild(el);
     });
   }
 
-  renderTimeline() {
-    this.timelineList.innerHTML = '';
-    this.data.timeline.forEach((item, index) => {
-      const el = document.createElement('div');
-      el.className = 'timeline-item';
-      el.innerHTML = `
-        <div class="timeline-dot"></div>
-        <div class="timeline-header">
-          <h3 class="timeline-title editable" contenteditable="${this.isEditMode}">
-            ${item.title}
-            <button class="timeline-delete-btn" title="삭제"><i class="fa-solid fa-trash-can"></i></button>
-          </h3>
-          <span class="timeline-period editable" contenteditable="${this.isEditMode}">${item.period}</span>
-        </div>
-        <div class="timeline-role editable" contenteditable="${this.isEditMode}">${item.role}</div>
-        <div class="timeline-desc editable" contenteditable="${this.isEditMode}">${item.desc}</div>
-      `;
-
-      // Live edits
-      const titleEl = el.querySelector('.timeline-title');
-      const periodEl = el.querySelector('.timeline-period');
-      const roleEl = el.querySelector('.timeline-role');
-      const descEl = el.querySelector('.timeline-desc');
-
-      periodEl.addEventListener('blur', () => {
-        this.data.timeline[index].period = periodEl.textContent.trim();
+  handleGalleryFiles(files) {
+    let loaded = 0;
+    files.forEach(file => {
+      this.compressImage(file, (dataUrl) => {
+        this.data.gallery.push({
+          id: 'g-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
+          title: file.name.replace(/\.[^/.]+$/, "") || '갤러리 사진',
+          image: dataUrl
+        });
+        loaded++;
+        if (loaded === files.length) {
+          this.render();
+          this.save();
+          this.showToast(`📸 갤러리 사진 ${files.length}장이 추가되었습니다!`);
+        }
       });
-      roleEl.addEventListener('blur', () => {
-        this.data.timeline[index].role = roleEl.textContent.trim();
-      });
-      descEl.addEventListener('blur', () => {
-        this.data.timeline[index].desc = descEl.textContent.trim();
-      });
-
-      el.querySelector('.timeline-delete-btn').addEventListener('click', () => {
-        this.data.timeline.splice(index, 1);
-        this.renderTimeline();
-        this.saveData();
-      });
-
-      this.timelineList.appendChild(el);
     });
   }
 
-  // ==========================================
-  // Actions & Helpers
-  // ==========================================
-  toggleEditMode() {
-    this.isEditMode = !this.isEditMode;
-    document.body.classList.toggle('body-edit-mode', this.isEditMode);
+  render() {
+    if (this.displayLogo) this.displayLogo.textContent = this.data.name;
+    if (this.displayName) this.displayName.textContent = this.data.name;
+    if (this.displayRole) this.displayRole.textContent = this.data.role;
+    if (this.displayIntro) this.displayIntro.textContent = this.data.intro;
+    if (this.displayFooterName) this.displayFooterName.textContent = this.data.name;
+    if (this.displayPortraitCaption) this.displayPortraitCaption.textContent = this.data.portraitCaption;
+    if (this.displayAboutText) this.displayAboutText.textContent = this.data.aboutText;
 
-    if (this.isEditMode) {
-      this.btnEditMode.classList.remove('btn-primary');
-      this.btnEditMode.classList.add('btn-secondary');
-      this.btnEditMode.innerHTML = '<i class="fa-solid fa-check"></i> <span class="btn-text">편집 완료</span>';
-      this.editBanner.classList.remove('hidden');
-      this.showToast('✏️ 편집 모드가 켜졌습니다. 텍스트를 클릭해 직접 수정하세요!');
-    } else {
-      this.btnEditMode.classList.add('btn-primary');
-      this.btnEditMode.classList.remove('btn-secondary');
-      this.btnEditMode.innerHTML = '<i class="fa-solid fa-pen-to-square"></i> <span class="btn-text">편집 모드 켜기</span>';
-      this.editBanner.classList.add('hidden');
-      this.saveData();
+    // Portrait Image
+    if (this.displayPortrait) {
+      if (this.data.portrait) {
+        this.displayPortrait.src = this.data.portrait;
+        this.displayPortrait.removeAttribute('hidden');
+        if (this.portraitFallback) this.portraitFallback.setAttribute('hidden', '');
+      } else {
+        this.displayPortrait.setAttribute('hidden', '');
+        if (this.portraitFallback) this.portraitFallback.removeAttribute('hidden');
+      }
     }
 
-    this.updateEditModeAttributes();
+    // About Me Photos
+    if (this.aboutPhotoGrid) {
+      this.aboutPhotoGrid.innerHTML = '';
+      if (!this.data.aboutPhotos || this.data.aboutPhotos.length === 0) {
+        this.aboutPhotoGrid.innerHTML = `<div style="grid-column:1/-1; color:#888; font-size:0.9rem; padding:10px 0;">등록된 소개 사진이 없습니다. [사진 추가] 버튼을 눌러보세요!</div>`;
+      } else {
+        this.data.aboutPhotos.forEach((item, index) => {
+          const div = document.createElement('div');
+          div.className = 'about-photo-item';
+          div.innerHTML = `
+            <img src="${item.image}" alt="${item.title}" loading="lazy" />
+            <button class="btn-del-photo" title="사진 삭제"><i class="fa-solid fa-xmark"></i></button>
+          `;
+          div.querySelector('img').addEventListener('click', () => this.openLightbox(item.image));
+          div.querySelector('.btn-del-photo').addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (confirm('이 사진을 삭제하시겠습니까?')) {
+              this.data.aboutPhotos.splice(index, 1);
+              this.render();
+              this.save();
+            }
+          });
+          this.aboutPhotoGrid.appendChild(div);
+        });
+      }
+    }
+
+    // Tags
+    if (this.displayTags) {
+      this.displayTags.innerHTML = '';
+      this.data.tags.forEach(tag => {
+        const li = document.createElement('li');
+        li.textContent = tag.startsWith('#') ? tag : '#' + tag;
+        this.displayTags.appendChild(li);
+      });
+    }
+
+    // Timeline
+    if (this.displayTimeline) {
+      this.displayTimeline.innerHTML = '';
+      this.data.timeline.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <div class="when">${item.period}</div>
+          <h3>${item.title}</h3>
+          <p>${item.desc}</p>
+        `;
+        this.displayTimeline.appendChild(li);
+      });
+    }
+
+    // Main Gallery
+    if (this.displayGallery) {
+      this.displayGallery.innerHTML = '';
+      if (this.data.gallery.length === 0) {
+        this.displayGallery.innerHTML = `<p class="empty-note">등록된 갤러리 사진이 없습니다.</p>`;
+      } else {
+        this.data.gallery.forEach(item => {
+          const fig = document.createElement('figure');
+          fig.innerHTML = `<img src="${item.image}" alt="${item.title}" loading="lazy" />`;
+          fig.addEventListener('click', () => this.openLightbox(item.image));
+          this.displayGallery.appendChild(fig);
+        });
+      }
+    }
+
+    // Contact Links
+    if (this.displayContact) {
+      this.displayContact.innerHTML = '';
+      const c = this.data.contact;
+      if (c.email) this.appendContactLink(`mailto:${c.email}`, `<i class="fa-solid fa-envelope"></i> ${c.email}`);
+      if (c.github) this.appendContactLink(c.github.startsWith('http') ? c.github : `https://${c.github}`, `<i class="fa-brands fa-github"></i> ${c.github}`);
+      if (c.blog) this.appendContactLink(c.blog.startsWith('http') ? c.blog : `https://${c.blog}`, `<i class="fa-solid fa-globe"></i> ${c.blog}`);
+      if (c.phone) this.appendContactLink(`tel:${c.phone}`, `<i class="fa-solid fa-phone"></i> ${c.phone}`);
+    }
   }
 
-  updateEditModeAttributes() {
-    document.querySelectorAll('.editable').forEach(el => {
-      el.setAttribute('contenteditable', this.isEditMode ? 'true' : 'false');
-    });
+  appendContactLink(href, html) {
+    const a = document.createElement('a');
+    a.href = href;
+    a.target = '_blank';
+    a.innerHTML = html;
+    this.displayContact.appendChild(a);
   }
 
-  toggleTheme() {
-    this.data.theme = this.data.theme === 'dark' ? 'light' : 'dark';
-    this.render();
-    this.saveData();
+  // Open & Populate Editor Panel
+  openEditor() {
+    this.populateEditor();
+    if (this.editor) this.editor.removeAttribute('hidden');
   }
 
-  collectDOMData() {
-    document.querySelectorAll('.editable[data-key]').forEach(el => {
-      const key = el.getAttribute('data-key');
-      this.data.texts[key] = el.textContent.trim();
-    });
+  closeEditor() {
+    if (this.editor) this.editor.setAttribute('hidden', '');
   }
 
-  addSkillItem() {
-    this.data.skills.push({ name: '새로운 보유 기술', level: 80 });
-    this.renderSkills();
-    this.showToast('새로운 기술 항목이 추가되었습니다.');
-    this.saveData();
+  populateEditor() {
+    if (this.inputName) this.inputName.value = this.data.name;
+    if (this.inputRole) this.inputRole.value = this.data.role;
+    if (this.inputIntro) this.inputIntro.value = this.data.intro;
+    if (this.inputPortraitCaption) this.inputPortraitCaption.value = this.data.portraitCaption;
+    if (this.inputPortraitUrl) this.inputPortraitUrl.value = this.data.portrait.startsWith('http') ? this.data.portrait : '';
+    if (this.inputAboutText) this.inputAboutText.value = this.data.aboutText;
+    if (this.inputTags) this.inputTags.value = this.data.tags.join(', ');
+
+    if (this.inputEmail) this.inputEmail.value = this.data.contact.email || '';
+    if (this.inputGithub) this.inputGithub.value = this.data.contact.github || '';
+    if (this.inputBlog) this.inputBlog.value = this.data.contact.blog || '';
+    if (this.inputPhone) this.inputPhone.value = this.data.contact.phone || '';
+
+    // Render Editor About Gallery
+    if (this.editorAboutGallery) {
+      this.editorAboutGallery.innerHTML = '';
+      this.data.aboutPhotos.forEach((item, index) => {
+        const fig = document.createElement('figure');
+        fig.innerHTML = `
+          <img src="${item.image}" alt="" />
+          <button class="remove-photo" title="삭제">&times;</button>
+        `;
+        fig.querySelector('.remove-photo').addEventListener('click', () => {
+          this.data.aboutPhotos.splice(index, 1);
+          this.populateEditor();
+          this.render();
+        });
+        this.editorAboutGallery.appendChild(fig);
+      });
+    }
+
+    // Render Editor Gallery
+    if (this.editorGalleryList) {
+      this.editorGalleryList.innerHTML = '';
+      this.data.gallery.forEach((item, index) => {
+        const fig = document.createElement('figure');
+        fig.innerHTML = `
+          <img src="${item.image}" alt="" />
+          <button class="remove-photo" title="삭제">&times;</button>
+        `;
+        fig.querySelector('.remove-photo').addEventListener('click', () => {
+          this.data.gallery.splice(index, 1);
+          this.populateEditor();
+          this.render();
+        });
+        this.editorGalleryList.appendChild(fig);
+      });
+    }
   }
 
-  addTimelineItem() {
-    this.data.timeline.push({
-      id: 'time-' + Date.now(),
-      title: '새로운 활동 / 프로젝트명',
-      period: '2024.01 - 2024.12',
-      role: '담당 역할 또는 직무',
-      desc: '진행한 업무 내용과 배운 점을 자세히 적어보세요.'
-    });
-    this.renderTimeline();
-    this.showToast('새로운 이력 항목이 추가되었습니다.');
-    this.saveData();
+  syncEditorToData() {
+    if (this.inputName) this.data.name = this.inputName.value.trim();
+    if (this.inputRole) this.data.role = this.inputRole.value.trim();
+    if (this.inputIntro) this.data.intro = this.inputIntro.value.trim();
+    if (this.inputPortraitCaption) this.data.portraitCaption = this.inputPortraitCaption.value.trim();
+    if (this.inputAboutText) this.data.aboutText = this.inputAboutText.value.trim();
+
+    if (this.inputTags) {
+      this.data.tags = this.inputTags.value
+        .split(',')
+        .map(t => t.trim().replace(/^#/, ''))
+        .filter(Boolean);
+    }
+
+    if (this.inputEmail) this.data.contact.email = this.inputEmail.value.trim();
+    if (this.inputGithub) this.data.contact.github = this.inputGithub.value.trim();
+    if (this.inputBlog) this.data.contact.blog = this.inputBlog.value.trim();
+    if (this.inputPhone) this.data.contact.phone = this.inputPhone.value.trim();
   }
 
-  // URL Modal
-  openUrlModal(title, callback) {
-    document.getElementById('urlModalTitle').textContent = title;
-    this.urlInput.value = '';
-    this.urlPreviewImg.src = '';
-    this.urlPreviewImg.classList.add('hidden');
-    this.urlTargetCallback = callback;
-    this.urlModal.classList.remove('hidden');
-    setTimeout(() => this.urlInput.focus(), 50);
+  openLightbox(src) {
+    if (this.lightboxImg && this.lightbox) {
+      this.lightboxImg.src = src;
+      this.lightbox.classList.remove('hidden');
+    }
   }
 
-  closeUrlModal() {
-    this.urlModal.classList.add('hidden');
-    this.urlTargetCallback = null;
-  }
-
-  // Lightbox
-  openLightbox(src, caption) {
-    this.lightboxImg.src = src;
-    this.lightboxCaption.textContent = caption || '';
-    this.lightboxModal.classList.remove('hidden');
-  }
-
-  closeLightbox() {
-    this.lightboxModal.classList.add('hidden');
-  }
-
-  // Toast
   showToast(msg) {
-    this.toastMessage.textContent = msg;
+    if (!this.toast) return;
+    this.toast.textContent = msg;
     this.toast.classList.remove('hidden');
-    clearTimeout(this.toastTimeout);
-    this.toastTimeout = setTimeout(() => {
+    clearTimeout(this.toastTimer);
+    this.toastTimer = setTimeout(() => {
       this.toast.classList.add('hidden');
-    }, 2800);
+    }, 2500);
   }
 
-  // Backup & Restore
   exportJson() {
-    this.collectDOMData();
     const blob = new Blob([JSON.stringify(this.data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `portfolio-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `portfolio-data-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    this.showToast('📁 데이터가 JSON 파일로 다운로드되었습니다.');
-  }
-
-  importJson(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      try {
-        const json = JSON.parse(event.target.result);
-        if (json.texts && json.skills) {
-          this.data = { ...DEFAULT_DATA, ...json };
-          this.render();
-          this.saveData();
-          this.showToast('🎉 데이터를 성공적으로 불러왔습니다!');
-        } else {
-          alert('올바른 백업 파일 형식이 아닙니다.');
-        }
-      } catch (err) {
-        alert('JSON 파일을 읽는 중 오류가 발생했습니다: ' + err.message);
-      }
-    };
-    reader.readAsText(file);
-    e.target.value = '';
-  }
-
-  resetData() {
-    if (confirm('모든 내용을 기본 예시 템플릿으로 되돌리시겠습니까? 작성한 내용이 삭제됩니다.')) {
-      this.data = JSON.parse(JSON.stringify(DEFAULT_DATA));
-      localStorage.removeItem('my_portfolio_data');
-      this.render();
-      this.showToast('기본 예시로 초기화되었습니다.');
-    }
+    this.showToast('📁 백업 파일이 다운로드되었습니다.');
   }
 }
 
-// Initialize on DOM load
+// Start
 document.addEventListener('DOMContentLoaded', () => {
-  window.app = new PortfolioApp();
+  window.portfolio = new PortfolioManager();
 });
