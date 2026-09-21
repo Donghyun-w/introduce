@@ -9,6 +9,15 @@ const DEFAULT_DATA = {
   portrait: 'Public/IMG_6526.jpeg',
   portraitCaption: '장동현',
   aboutText: ``,
+  aboutPhotos: [
+    {
+      id: 'about-default-1',
+      title: '소개 사진',
+      image: 'Public/IMG_6638.jpeg'
+    }
+  ],
+  gallery: [],
+  timeline: [],
   tags: ['미식축구', '농구', '게임'],
   contact: {
     email: 'example@email.com',
@@ -36,7 +45,7 @@ class PortfolioManager {
           ...parsed,
           portrait: parsed.portrait || DEFAULT_DATA.portrait,
           contact: { ...DEFAULT_DATA.contact, ...(parsed.contact || {}) },
-          aboutPhotos: parsed.aboutPhotos || DEFAULT_DATA.aboutPhotos,
+          aboutPhotos: (parsed.aboutPhotos && parsed.aboutPhotos.length > 0) ? parsed.aboutPhotos : DEFAULT_DATA.aboutPhotos,
           timeline: parsed.timeline || DEFAULT_DATA.timeline,
           gallery: parsed.gallery || DEFAULT_DATA.gallery,
           tags: parsed.tags || DEFAULT_DATA.tags
